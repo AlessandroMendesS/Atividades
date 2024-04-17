@@ -1,23 +1,15 @@
 from os import system
 from funcoes import *
 
+#Professor, nota-se que na opção que o senhor pede para verificar a segurança,nao pede nenhuma senha ou algo do tipo para o bloqueio,por isso crie um usuario de adm e senha para que a pessoa que esta no caixa se sinta mais segura caso alguem mal intencionado tente fazer o bloqueio clicando apenas no "s".'''
+usuarios = {"Alessandro":123,"Joana":"qwe","adm":123}
 
-## TODO: trocar esse sistema de autenticação por dicionários
-usuario1 = "vini"
-usuario2 = "jonas"
-senha1 = "123"
-senha2 = "qwe"
-
-dicionario = {"Alessandro":"123","Joana":"qwe"}
-
-## TODO: trocar por dicionários também
 usuarioLogado = ""
 senhaLogado = ""
 dinheiro = 0
 bloqueado = False
 
-dicionario2 = {"":"","dinheiro":0,"bloqueado":False}
-
+produtos = {}
 
 
 def limpar():
@@ -45,47 +37,37 @@ while True:
 
         if opcaoSelecionada == 1:
             cadastro()
- 	    ## TODO: fazer uso de funções para isolar essa funcionalidade em um bloco de código separado
-	    ## TODO: refatorar esse código para que ele valide usuario e senha com base no dicionário criado
-
-    
-
-        
+ 	    
         elif opcaoSelecionada == 2:
             print("------- Gerenciar Produtos -------")
-            opcaoo = int(input("Qual opçaõ deseja? A-Adicionar,B-Alterar,C-Excluir,D-Visualizar e E-Pesquisar: "))
+            opcaoo = str(input("Qual opçaõ deseja? A-Adicionar,B-Alterar,C-Excluir,D-Visualizar e E-Pesquisar: ")).upper()
             if opcaoo == "A":
                 Adicionar()
-            if opcaoo == "B":
+            elif opcaoo == "B":
                 Alterar()
-            if opcaoo == "C":
-                
+            elif opcaoo == "C":
+                excluir()
+            elif opcaoo == "D":
+                pesquisar()
+            elif opcaoo == "E":
+                visualizar()
 
-	    ## TODO: criar uma forma de adicionar, alterar, excluir, visualizar e pesquisar produtos do mercado (use listas ou dicionarios)
-
+	  
         elif opcaoSelecionada == 3:
             print("------- Passar Compras -------")
-	    ## TODO: criar uma forma de "passar as compras" dos clientes e registrar essas compras. Lembre-se que ao final você precisará exibir um relatório do dia.
-	    ## TODO: aqui é importante validar, se não houver produtos, não é possível passar compras.
-            ## TODO: encontrar outras validações que fazem sentido!
-
+            passar_comprar()
 
         elif opcaoSelecionada == 4:
-	    ## TODO: eu acho que aqui temos um problema de segurança, verificar
             print("------- Bloqueio do caixa -------")
-            resposta = input("Tem certeza que deseja bloquear o caixa? (S/N)")
-            if resposta == "S" or resposta == "s":
-                bloqueado = True
-                limpar()
+            bloquear_caixa()
 
         elif opcaoSelecionada == 5:
             print("------- Fechar caixa ------")
-	    ## TODO: criar essa lógica: ao acionar o fechar caixa, deve-se exibir um relatório completo contendo
-	    ###      - O total de vendas do dia; total de dinheiro arrecadado; 
-	    ###      - O débito e o crédito devem devem se anular.
+            fechamento_relatorio()
 
         elif opcaoSelecionada == 6:
             print("------- Saindo do sistema de mercado ------")
             exit()
         else:
             print("Atenção❗: você digitou uma opção inválida ")
+            
