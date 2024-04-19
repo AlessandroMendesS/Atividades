@@ -74,4 +74,3 @@ while True:
             exit()
         else:
             print("Atenção❗: você digitou uma opção inválida ")
-            
