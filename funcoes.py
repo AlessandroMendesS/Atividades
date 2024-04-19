@@ -1,4 +1,5 @@
 def cadastro():
+    global usuarios,usuarioLogado,senhaLogado,dinheiro,limpar
     print("------- Inicialização de caixa -------")
     usuario = input("Digite o seu usuário: ")
     senha = input("Digite a sua senha: ")
@@ -12,9 +13,10 @@ def cadastro():
         print("⚠ Seu usuário ou senha estão errados")
     input("Digite qualquer tecla para voltar ao menu principal")
     limpar()
-    continue
+
 
 def Adicionar():
+    global produtos
     print("------- Adicionar Produto -------")
     nome = input("Digite o nome do produto: ")
     preco = float(input("Digite o preço do produto: "))
@@ -63,28 +65,29 @@ def passar_comprar():
             print("{}: R${:.2f}".format(produto, produtos[produto]))
             total += produtos[produto]
         print("Total da compra: R${:.2f}".format(total))
-    else:
-        print("Não há produtos disponíveis para compra.")
+
 
 
 def bloquear_caixa():
+    global bloqueado
     userADM = input("Digite o usuário administrador: ")
     senhaADM = input("Digite a senha do usuário administrador: ")
-    if userADM in usuarios and usuarios[userADM] == senhaADM:
+    if userADM == "adm" and senhaADM == "adm123":
         resposta = input("Tem certeza que deseja bloquear o caixa? (S/N): ")
-        if resposta.upper() == "s"
+        if resposta.upper() == "S":
             bloqueado = True
-            limpar()
+            print("Caixa bloqueado.")
+        else:
+            print("Operação cancelada.")
     else:
-        print("Digite um usuario e senha correspondente ao adiministrador")
+        print("Usuário administrador ou senha incorretos.")
+
 
 def fechamento_relatorio():
     if produtos:
         dinheiro = sum(produtos.values())
         numero_vendas= len(produtos)
-        print("Total de vendas no dia: R${}".format(numero_vendas))
+        print("Total de vendas no dia: {}".format(numero_vendas))
         print("Dinheiro arredado: {}".format(dinheiro))
     else:
         print("Nenhuma venda foi feita hoje")
-                
-
