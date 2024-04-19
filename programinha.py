@@ -1,15 +1,17 @@
 from os import system
 from funcoes import *
 
-#Professor, nota-se que na opção que o senhor pede para verificar a segurança,nao pede nenhuma senha ou algo do tipo para o bloqueio,por isso crie um usuario de adm e senha para que a pessoa que esta no caixa se sinta mais segura caso alguem mal intencionado tente fazer o bloqueio clicando apenas no "s".'''
-usuarios = {"Alessandro":123,"Joana":"qwe","adm":123}
-
-usuarioLogado = ""
-senhaLogado = ""
-dinheiro = 0
-bloqueado = False
 
 produtos = {}
+
+
+#Professor, nota-se que na opção que o senhor pede para verificar a segurança,nao pede nenhuma senha ou algo do tipo para o bloqueio,por isso crie um usuario de adm e senha para que a pessoa que esta no caixa se sinta mais segura caso alguem mal intencionado tente fazer o bloqueio clicando apenas no "s".'''
+usuarios = {"Alessandro":"123","Joana":"qwe"}
+
+usuarioLogado = None
+senhaLogado = None
+dinheiro = 0
+bloqueado = False
 
 
 def limpar():
@@ -18,13 +20,11 @@ def limpar():
 limpar()
 
 while True:
-
-    if bloqueado == True:
+    if bloqueado:
         print("### 🔐 Seu caixa está bloqueado ####")
-        senha = input("digite a senha do usuário para desbloquear")
-        if senha == senhaLogado:
+        senha = input("Digite a senha do usuário para desbloquear: ")
+        if senha == "123":
             bloqueado = False
-
     else:
         print('✅1 - Inicializar caixa')
         print("🍎 2 - Gerenciar Produtos")
@@ -37,34 +37,38 @@ while True:
 
         if opcaoSelecionada == 1:
             cadastro()
- 	    
         elif opcaoSelecionada == 2:
             print("------- Gerenciar Produtos -------")
-            opcaoo = str(input("Qual opçaõ deseja? A-Adicionar,B-Alterar,C-Excluir,D-Visualizar e E-Pesquisar: ")).upper()
-            if opcaoo == "A":
+            print("A-Adicionar")
+            print("B-Alterar")
+            print("C-Excluir")
+            print("D-Visualizar")
+            print("E-Pesquisar")
+            opcaoo = str(input("Digite a opcao desejavel: "))
+            if opcaoo.upper() == "A":
                 Adicionar()
-            elif opcaoo == "B":
+            elif opcaoo.upper() == "B":
                 Alterar()
-            elif opcaoo == "C":
+            elif opcaoo.upper() == "C":
                 excluir()
-            elif opcaoo == "D":
-                pesquisar()
-            elif opcaoo == "E":
+            elif opcaoo.upper() == "D":
                 visualizar()
-
-	  
+            elif opcaoo.upper() == "E":
+                pesquisar()
+            else:
+                print("Opção inválida.")
         elif opcaoSelecionada == 3:
+            if not produtos:
+                print("Não há produtos disponíveis para compra.")
+                continue
             print("------- Passar Compras -------")
             passar_comprar()
-
         elif opcaoSelecionada == 4:
             print("------- Bloqueio do caixa -------")
             bloquear_caixa()
-
         elif opcaoSelecionada == 5:
             print("------- Fechar caixa ------")
             fechamento_relatorio()
-
         elif opcaoSelecionada == 6:
             print("------- Saindo do sistema de mercado ------")
             exit()
